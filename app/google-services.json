@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "476118951841",
+    "firebase_url": "https://chatz-e9001.firebaseio.com",
+    "project_id": "chatz-e9001",
+    "storage_bucket": "chatz-e9001.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:476118951841:android:fd4e1e7943112023",
+        "android_client_info": {
+          "package_name": "com.lolin.deemon_face.chatz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "476118951841-jumin4orr1ptq3re93fiki8iqcpn0hev.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.lolin.deemon_face.chatz",
+            "certificate_hash": "5c8486ac729d9c110c024190c683383d850c5b47"
+          }
+        },
+        {
+          "client_id": "476118951841-mc6lra25u5hehns0hjg80bmul4nepq89.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlTaiCjHpHxH7StTBktdbwwh_3ckgD3HA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "476118951841-mc6lra25u5hehns0hjg80bmul4nepq89.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

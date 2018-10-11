@@ -1,0 +1,29 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">chatZ</string>
+    <string name="main_page">Main page</string>
+    <string name="need_a_new_account">Need a new Account ?</string>
+    <string name="create_account">Create account!</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="name">Name</string>
+    <string name="log_out">Log out</string>
+    <string name="create_a_new_account">Create a new Account!</string>
+    <string name="log_in">Log In</string>
+    <string name="welcome_to_chatz">Welcome to chatz</string>
+    <string name="login_to_your_account">Login to your Account</string>
+    <string name="already_have_account">Already have account</string>
+    <string name="login">LogIn</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="chats_page">Chats Page</string>
+    <string name="friends_page">Friends Page</string>
+    <string name="welcome_to_request_page">Welcome to Request Page</string>
+    <string name="your_name">Your Name</string>
+    <string name="about_you">About you</string>
+    <string name="change_name">Change name</string>
+    <string name="account_settings">Account settings</string>
+    <string name="all_users">All users</string>
+    <string name="jbvwb">jbvwb</string>
+    <string name="chatz_is_an_awesome_app">Chatz is an awesome app!</string>
+</resources>
