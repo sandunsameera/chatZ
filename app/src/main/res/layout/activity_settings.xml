@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".SettingsActivity"
-    android:background="@android:color/holo_blue_bright">
+    android:background="#261661">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:layout_width="170dp"
@@ -14,7 +14,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:background="@android:color/white"
-        android:id="@+id/settings_img"/>
+        android:id="@+id/settings_img"
+        android:backgroundTint="@android:color/black"/>
 
     <TextView
         android:id="@+id/settings_name"
@@ -25,7 +26,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="263dp"
         android:text="@string/your_name"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/white"
+        android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/settins_about"
@@ -35,25 +37,30 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="210dp"
         android:text="@string/chatz_is_an_awesome_app"
-        android:textColor="@android:color/black"/>
+        android:textColor="@android:color/white"/>
 
     <Button
         android:id="@+id/settings_chnge_name_btn"
-        android:layout_width="148dp"
-        android:layout_height="55dp"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="126dp"
-        android:background="@android:color/white"
-        android:text="@string/change_name"/>
+        android:background="@android:color/black"
+        android:text="@string/change_name"
+        android:alpha="0.4"
+        android:textColor="@android:color/white"/>
 
     <Button
         android:id="@+id/settings_chnge_about_btn"
-        android:layout_width="148dp"
+        android:layout_width="150dp"
         android:layout_height="55dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="55dp"
-        android:text="Change Caption" />
+        android:text="@string/change_caption"
+        android:background="@android:color/black"
+        android:alpha="0.4"
+        android:textColor="@android:color/white"/>
 
 </RelativeLayout>
