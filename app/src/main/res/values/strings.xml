@@ -10,7 +10,6 @@
     <string name="create_a_new_account">Create a new Account!</string>
     <string name="log_in">Log In</string>
     <string name="welcome_to_chatz">Welcome to chatz</string>
-    <string name="login_to_your_account">Login to your Account</string>
     <string name="already_have_account">Already have account</string>
     <string name="login">LogIn</string>
 
@@ -27,4 +26,5 @@
     <string name="jbvwb">jbvwb</string>
     <string name="chatz_is_an_awesome_app">Chatz is an awesome app!</string>
     <string name="change_caption">Change Caption</string>
+    <string name="login_to_your_account">Login to your Account</string>
 </resources>
