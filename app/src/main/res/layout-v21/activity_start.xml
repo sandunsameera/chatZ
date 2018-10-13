@@ -1,21 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".startActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".startActivity"
+    android:background="#261661">
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="231dp"
+        android:layout_centerInParent="true"
         android:text="@string/welcome_to_chatz"
-        android:textColor="@android:color/black"
-        android:textSize="30dp" />
+        android:textSize="30sp"
+        android:textColor="@android:color/white"/>
 
     <Button
         android:id="@+id/start_reg_btn"
@@ -24,8 +23,11 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="165dp"
-        android:background="@android:color/holo_red_dark"
-        android:text="@string/need_a_new_account" />
+        android:text="@string/need_a_new_account"
+        android:background="@drawable/button"
+        android:alpha="0.4"
+        android:textColor="@android:color/white"
+        />
 
     <Button
         android:id="@+id/start_logIn_btn"
@@ -35,5 +37,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="85dp"
         android:text="@string/already_have_account"
-        android:backgroundTint="@color/colorPrimary"/>
+        android:background="@drawable/button"
+        android:textColor="@android:color/white"
+        android:alpha="0.4"/>
 </RelativeLayout>

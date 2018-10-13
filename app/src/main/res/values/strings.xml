@@ -27,4 +27,5 @@
     <string name="chatz_is_an_awesome_app">Chatz is an awesome app!</string>
     <string name="change_caption">Change Caption</string>
     <string name="login_to_your_account">Login to your Account</string>
+    <string name="change_Image">Change Image</string>
 </resources>

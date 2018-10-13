@@ -40,14 +40,14 @@
         android:textColor="@android:color/white"/>
 
     <Button
-        android:id="@+id/settings_chnge_name_btn"
+        android:id="@+id/settings_chnge_image_btn"
         android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="126dp"
         android:background="@drawable/button"
-        android:text="@string/change_name"
+        android:text="@string/change_Image"
         android:alpha="0.4"
         android:textColor="@android:color/white"/>
 
