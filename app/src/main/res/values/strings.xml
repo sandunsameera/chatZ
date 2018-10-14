@@ -28,4 +28,6 @@
     <string name="change_caption">Change Caption</string>
     <string name="login_to_your_account">Login to your Account</string>
     <string name="change_Image">Change Image</string>
+    <string name="display_name">Display Name</string>
+    <string name="status">status</string>
 </resources>

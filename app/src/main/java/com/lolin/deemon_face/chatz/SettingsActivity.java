@@ -59,7 +59,7 @@ public class SettingsActivity extends AppCompatActivity {
 
 
         mCurrentUser = FirebaseAuth.getInstance ().getCurrentUser ();
-       // mImageStorage = FirebaseStorage.getInstance ().getReference ();
+        mImageStorage = FirebaseStorage.getInstance ().getReference ();
 
         String current_uid = mCurrentUser.getUid ();
         mUserDatabase = FirebaseDatabase.getInstance ().getReference("user").child (current_uid);
