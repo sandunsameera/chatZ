@@ -26,6 +26,8 @@ import com.google.firebase.storage.UploadTask;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
+import java.util.Random;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class SettingsActivity extends AppCompatActivity {
@@ -40,9 +42,10 @@ public class SettingsActivity extends AppCompatActivity {
     private Button mImageBtn;
 
     private static final int gallery_Pick =1;
-
+    private static final int MAX_LENGTH = 100;
     //storage of media firebase
     private StorageReference mImageStorage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,9 +56,10 @@ public class SettingsActivity extends AppCompatActivity {
         mName = findViewById (R.id.settings_name);
         mStatusBtn = findViewById (R.id.settins_about);
         mImageBtn = findViewById (R.id.settings_chnge_image_btn);
-        mImageStorage = FirebaseStorage.getInstance ().getReference ();
+
 
         mCurrentUser = FirebaseAuth.getInstance ().getCurrentUser ();
+       // mImageStorage = FirebaseStorage.getInstance ().getReference ();
 
         String current_uid = mCurrentUser.getUid ();
         mUserDatabase = FirebaseDatabase.getInstance ().getReference("user").child (current_uid);
@@ -105,7 +109,7 @@ public class SettingsActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
 
-                StorageReference filepath = mImageStorage.child ("Profile_images").child ("Profile_Image.jpg");
+                StorageReference filepath = mImageStorage.child ("Profile_pics").child (random () + ".jpg");
                 filepath.putFile (resultUri).addOnCompleteListener (new OnCompleteListener<UploadTask.TaskSnapshot> () {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
@@ -122,5 +126,22 @@ public class SettingsActivity extends AppCompatActivity {
             }
         }
     }
+
+    public static String random(){
+        Random generator = new Random ();
+        StringBuilder randomStringBuilder = new StringBuilder ();
+        int randomLength = generator.nextInt (MAX_LENGTH);
+        char tempchar;
+        for (int i=0; i<randomLength;i++)
+        {
+            tempchar = (char) (generator.nextInt (96)+32);
+            randomStringBuilder.append (tempchar);
+
+        }
+
+        return randomStringBuilder.toString();
+
+    }
+
 
 }
