@@ -1,24 +1,24 @@
 package com.lolin.deemon_face.chatz;
 
-import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
+import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.Objects;
-
 public class Users_activity extends AppCompatActivity {
 
+    private FirebaseRecyclerAdapter mFirebaseRecyclerAdapter;
     private Toolbar mToolbar;
     private RecyclerView mUsersList;
     private DatabaseReference mUsersDatabase;
@@ -39,37 +39,39 @@ public class Users_activity extends AppCompatActivity {
         mUsersList = findViewById (R.id.users_list);
         mUsersList.setHasFixedSize (true);
         mUsersList.setLayoutManager (new LinearLayoutManager (this));
+
     }
 
     @Override
     protected void onStart() {
         super.onStart ();
 
-        FirebaseRecyclerAdapter<Users, UsersViewHolder> firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users, UsersViewHolder> (
+        FirebaseRecyclerOptions<Users> options= new FirebaseRecyclerOptions.Builder<Users> ()
+                .setQuery (mUsersDatabase, Users.class)
+                .build ();
 
-                Users.class,
-                R.layout.users_single_layout,
-                UsersViewHolder.class, mUsersDatabase) {
+        FirebaseRecyclerAdapter mFirebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users, UsersViewHolder> (options) {
+            @Override
+            protected void onBindViewHolder(@NonNull UsersViewHolder holder, int position, @NonNull Users model) {
+
+                holder.setName (model.getName ());
+                holder.setStatus (model.getStatus ());
+
+            }
+
             @NonNull
             @Override
-            public UsersViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+            public UsersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
                 return null;
-            }
-
-            @Override
-            protected void onBindViewHolder( UsersViewHolder usersViewHolder, int i, @NonNull Users users) {
-
-                usersViewHolder.setName(users.getName ());
 
 
             }
-
-
         };
 
-        mUsersList.setAdapter (FirebaseRecyclerAdapter);
+
 
     }
+
 
     public static class UsersViewHolder extends RecyclerView.ViewHolder{
 
@@ -84,6 +86,11 @@ public class Users_activity extends AppCompatActivity {
         public void setName(String name){
             TextView usersNameView = mView.findViewById (R.id.user_single_name);
             usersNameView.setText (name);
+        }
+
+        public void setStatus(String status){
+            TextView usersStatusView = mView.findViewById (R.id.user_single_status);
+            usersStatusView.setText (status);
         }
 
             }
