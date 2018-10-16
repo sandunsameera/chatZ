@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -24,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-import com.squareup.picasso.Picasso;
+//import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -80,7 +81,8 @@ public class SettingsActivity extends AppCompatActivity {
                 mName.setText (name);
                 mStatusBtn.setText (status);
 
-                Picasso.with(SettingsActivity.this).load(image).into(mDisplayImage);
+
+                Glide.with(SettingsActivity.this).load(image).into(mDisplayImage);
 
             }
 
@@ -124,13 +126,14 @@ public class SettingsActivity extends AppCompatActivity {
 
 
                 StorageReference filepath = mImageStorage.child ("Profile_pics").child (current_user_Id + ".jpg");
+                final Task<Uri> download_url = filepath.getDownloadUrl ();
                 filepath.putFile (resultUri).addOnCompleteListener (new OnCompleteListener<UploadTask.TaskSnapshot> () {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                        if (task.isSuccessful ()){
-                           String download_url =task.getResult ().getDownload().toString();
-
-                           mUserDatabase.child ("image").setValue (download_url).addOnCompleteListener (new OnCompleteListener<Void> () {
+                           //String download_url =task.getResult ().getDownloadUrl().toString();
+                           Uri url =  download_url.getResult ();
+                           mUserDatabase.child ("image").setValue (url).addOnCompleteListener (new OnCompleteListener<Void> () {
                                @Override
                                public void onComplete(@NonNull Task<Void> task) {
                                    if (task.isSuccessful ()){

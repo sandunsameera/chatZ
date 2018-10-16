@@ -8,14 +8,14 @@
     android:background="#261661">
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/settings_img"
         android:layout_width="170dp"
         android:layout_height="170dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:background="@android:color/white"
-        android:id="@+id/settings_img"
-        android:backgroundTint="@android:color/black"/>
+        android:backgroundTint="@android:color/black"
+        tools:src="@tools:sample/avatars" />
 
     <TextView
         android:id="@+id/settings_name"

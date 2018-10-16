@@ -15,6 +15,7 @@ import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 
 public class Users_activity extends AppCompatActivity {
 
@@ -44,55 +45,53 @@ public class Users_activity extends AppCompatActivity {
 
     @Override
     protected void onStart() {
-        super.onStart ();
-
-        FirebaseRecyclerOptions<Users> options= new FirebaseRecyclerOptions.Builder<Users> ()
-                .setQuery (mUsersDatabase, Users.class)
-                .build ();
-
-        FirebaseRecyclerAdapter mFirebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Users, UsersViewHolder> (options) {
-            @Override
-            protected void onBindViewHolder(@NonNull UsersViewHolder holder, int position, @NonNull Users model) {
-
-                holder.setName (model.getName ());
-                holder.setStatus (model.getStatus ());
-
-            }
-
-            @NonNull
-            @Override
-            public UsersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
-                return null;
-
-
-            }
-        };
-
-
+        super.onStart();
+        startListening();
 
     }
+    public void startListening(){
+        Query query = FirebaseDatabase.getInstance()
+                .getReference()
+                .child("Users")
+                .limitToLast(50);
 
+        FirebaseRecyclerOptions<Users> options =
+                new FirebaseRecyclerOptions.Builder<Users>()
+                        .setQuery(query, Users.class)
+                        .build();
+        FirebaseRecyclerAdapter adapter = new FirebaseRecyclerAdapter<Users, UserViewHolder>(options) {
+            @Override
+            public UserViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+                // Create a new instance of the ViewHolder, in this case we are using a custom
+                // layout called R.layout.message for each item
+                View view = LayoutInflater.from(parent.getContext())
+                        .inflate(R.layout.users_single_layout, parent, false);
 
-    public static class UsersViewHolder extends RecyclerView.ViewHolder{
+                return new UserViewHolder(view);
+            }
 
+            @Override
+            protected void onBindViewHolder(UserViewHolder userViewHolder, int i, Users users) {
+                // Bind the Chat object to the ChatHolder
+                userViewHolder.setName(users.name);
+                // ...
+            }
+
+        };
+        mUsersList.setAdapter(adapter);
+        adapter.startListening();
+    }
+
+    public static class UserViewHolder extends RecyclerView.ViewHolder {
         View mView;
-
-        public UsersViewHolder(@NonNull View itemView) {
-            super (itemView);
-
+        public UserViewHolder(View itemView) {
+            super(itemView);
             mView = itemView;
         }
-
         public void setName(String name){
-            TextView usersNameView = mView.findViewById (R.id.user_single_name);
-            usersNameView.setText (name);
+            TextView userNameView =mView.findViewById(R.id.user_single_name);
+            userNameView.setText(name);
         }
-
-        public void setStatus(String status){
-            TextView usersStatusView = mView.findViewById (R.id.user_single_status);
-            usersStatusView.setText (status);
-        }
-
-            }
+    }
 
 }
