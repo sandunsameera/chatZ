@@ -15,7 +15,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:backgroundTint="@android:color/black"
-        tools:src="@tools:sample/avatars" />
+        app:srcCompat="@drawable/ic_person_black_24dp" />
 
     <TextView
         android:id="@+id/settings_name"

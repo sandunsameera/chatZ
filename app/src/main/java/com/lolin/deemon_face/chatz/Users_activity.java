@@ -19,7 +19,6 @@ import com.google.firebase.database.Query;
 
 public class Users_activity extends AppCompatActivity {
 
-    private FirebaseRecyclerAdapter mFirebaseRecyclerAdapter;
     private Toolbar mToolbar;
     private RecyclerView mUsersList;
     private DatabaseReference mUsersDatabase;
@@ -52,7 +51,7 @@ public class Users_activity extends AppCompatActivity {
     public void startListening(){
         Query query = FirebaseDatabase.getInstance()
                 .getReference()
-                .child("Users")
+                .child("user")
                 .limitToLast(50);
 
         FirebaseRecyclerOptions<Users> options =

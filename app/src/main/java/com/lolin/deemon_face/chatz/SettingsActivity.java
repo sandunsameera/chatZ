@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -44,7 +45,7 @@ public class SettingsActivity extends AppCompatActivity {
     private TextView mStatusBtn;
     private Button mImageBtn;
 
-    private static final int gallery_Pick =1;
+    private static final int gallery_Pick = 1;
     private static final int MAX_LENGTH = 100;
     //storage of media firebase
     private StorageReference mImageStorage;
@@ -67,7 +68,7 @@ public class SettingsActivity extends AppCompatActivity {
         mImageStorage = FirebaseStorage.getInstance ().getReference ();
 
         String current_uid = mCurrentUser.getUid ();
-        mUserDatabase = FirebaseDatabase.getInstance ().getReference("user").child (current_uid);
+        mUserDatabase = FirebaseDatabase.getInstance ().getReference ("user").child (current_uid);
 
         mUserDatabase.addValueEventListener (new ValueEventListener () {
             @Override
@@ -82,7 +83,7 @@ public class SettingsActivity extends AppCompatActivity {
                 mStatusBtn.setText (status);
 
 
-                Glide.with(SettingsActivity.this).load(image).into(mDisplayImage);
+                Glide.with (SettingsActivity.this).load (image).apply (RequestOptions.errorOf (R.drawable.ic_person_black_24dp)).into (mDisplayImage);
 
             }
 
@@ -101,10 +102,10 @@ public class SettingsActivity extends AppCompatActivity {
 
                 startActivityForResult (Intent.createChooser(galleryIntent, "Choose your profile picture"),gallery_Pick);
                 */
-               CropImage.activity()
-                        .setGuidelines(CropImageView.Guidelines.ON)
-                        .setAspectRatio (1,1)
-                        .start(SettingsActivity.this);
+                CropImage.activity ()
+                        .setGuidelines (CropImageView.Guidelines.ON)
+                        .setAspectRatio (1, 1)
+                        .start (SettingsActivity.this);
             }
         });
 
@@ -113,16 +114,16 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
-            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            CropImage.ActivityResult result = CropImage.getActivityResult (data);
             if (resultCode == RESULT_OK) {
 
                 mProgressDialog = new ProgressDialog (SettingsActivity.this);
                 mProgressDialog.setTitle ("Uploading Image ..");
                 mProgressDialog.setMessage ("PLease wait a minute");
                 mProgressDialog.setCanceledOnTouchOutside (false);
-                Uri resultUri = result.getUri();
+                Uri resultUri = result.getUri ();
 
-                String current_user_Id = mCurrentUser.getUid ();
+                final String current_user_Id = mCurrentUser.getUid ();
 
 
                 StorageReference filepath = mImageStorage.child ("Profile_pics").child (current_user_Id + ".jpg");
@@ -130,48 +131,51 @@ public class SettingsActivity extends AppCompatActivity {
                 filepath.putFile (resultUri).addOnCompleteListener (new OnCompleteListener<UploadTask.TaskSnapshot> () {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                       if (task.isSuccessful ()){
-                           //String download_url =task.getResult ().getDownloadUrl().toString();
-                           Uri url =  download_url.getResult ();
-                           mUserDatabase.child ("image").setValue (url).addOnCompleteListener (new OnCompleteListener<Void> () {
-                               @Override
-                               public void onComplete(@NonNull Task<Void> task) {
-                                   if (task.isSuccessful ()){
+                        if (task.isSuccessful ()) {
+                            //String download_url =task.getResult ().getDownloadUrl().toString();
+                            download_url.addOnCompleteListener (new OnCompleteListener<Uri> () {
+                                @Override
+                                public void onComplete(@NonNull Task<Uri> task) {
+                                    Uri uri = download_url.getResult ();
+                                    mUserDatabase.child (current_user_Id).child ("default_image").setValue (uri).addOnCompleteListener (new OnCompleteListener<Void> () {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful ()) {
 
-                                       mProgressDialog.dismiss ();
-                                       Toast.makeText (SettingsActivity.this, "success in Uploading", Toast.LENGTH_LONG).show ();
+                                                mProgressDialog.dismiss ();
+                                                Toast.makeText (SettingsActivity.this, "success in Uploading", Toast.LENGTH_LONG).show ();
 
 
-                                   }
+                                            }
 
-                               }
-                           });
-                       }
-                       else {
-                           Toast.makeText (SettingsActivity.this, "Error in Uploading", Toast.LENGTH_LONG).show ();
-                           mProgressDialog.dismiss ();
-                       }
+                                        }
+                                    });
+                                }
+                            });
+                        } else {
+                            Toast.makeText (SettingsActivity.this, "Error in Uploading", Toast.LENGTH_LONG).show ();
+                            mProgressDialog.dismiss ();
+                        }
                     }
                 });
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
-                Exception error = result.getError();
+                Exception error = result.getError ();
             }
         }
     }
 
-    public static String random(){
+    public static String random() {
         Random generator = new Random ();
         StringBuilder randomStringBuilder = new StringBuilder ();
         int randomLength = generator.nextInt (MAX_LENGTH);
         char tempchar;
-        for (int i=0; i<randomLength;i++)
-        {
-            tempchar = (char) (generator.nextInt (96)+32);
+        for (int i = 0; i < randomLength; i++) {
+            tempchar = (char) (generator.nextInt (96) + 32);
             randomStringBuilder.append (tempchar);
 
         }
 
-        return randomStringBuilder.toString();
+        return randomStringBuilder.toString ();
 
     }
 
