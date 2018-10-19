@@ -25,13 +25,14 @@
             android:name=".RegisterActivity"
             android:parentActivityName=".startActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".SettingsActivity" />
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
         <activity
             android:name=".Users_activity"
             android:parentActivityName=".MainActivity" />
+        <activity android:name=".status_activity"></activity>
     </application>
 
 </manifest>

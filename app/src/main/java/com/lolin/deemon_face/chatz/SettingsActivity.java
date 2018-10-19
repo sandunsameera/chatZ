@@ -2,6 +2,7 @@ package com.lolin.deemon_face.chatz;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.net.ProxyInfo;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -42,7 +43,8 @@ public class SettingsActivity extends AppCompatActivity {
     //layout
     private CircleImageView mDisplayImage;
     private TextView mName;
-    private TextView mStatusBtn;
+    private TextView mStatus;
+    private Button mStatusBtn;
     private Button mImageBtn;
 
     private static final int gallery_Pick = 1;
@@ -60,8 +62,9 @@ public class SettingsActivity extends AppCompatActivity {
 
         mDisplayImage = findViewById (R.id.settings_img);
         mName = findViewById (R.id.settings_name);
-        mStatusBtn = findViewById (R.id.settins_about);
+        mStatusBtn =findViewById (R.id.settings_chnge_about_btn);
         mImageBtn = findViewById (R.id.settings_chnge_image_btn);
+        mStatus = findViewById (R.id.settins_about);
 
 
         mCurrentUser = FirebaseAuth.getInstance ().getCurrentUser ();
@@ -76,11 +79,22 @@ public class SettingsActivity extends AppCompatActivity {
 
                 String name = dataSnapshot.child ("name").getValue ().toString ();
                 String image = dataSnapshot.child ("image").getValue ().toString ();
-                String status = dataSnapshot.child ("status").getValue ().toString ();
+                final String status = dataSnapshot.child ("status").getValue ().toString ();
                 String thumb_image = dataSnapshot.child ("thumb_image").getValue ().toString ();
 
                 mName.setText (name);
-                mStatusBtn.setText (status);
+                mStatus.setText (status);
+
+                mStatusBtn.setOnClickListener (new View.OnClickListener () {
+                    @Override
+                    public void onClick(View v) {
+
+                        String status_value = mStatus.getText ().toString ();
+                        Intent Status_intent = new Intent (SettingsActivity.this, status_activity.class);
+                        Status_intent.putExtra ("status_value",status_value);
+                        startActivity(Status_intent);
+                    }
+                });
 
 
                 Glide.with (SettingsActivity.this).load (image).apply (RequestOptions.errorOf (R.drawable.ic_person_black_24dp)).into (mDisplayImage);
@@ -176,6 +190,8 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         return randomStringBuilder.toString ();
+
+
 
     }
 

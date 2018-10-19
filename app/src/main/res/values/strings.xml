@@ -30,4 +30,6 @@
     <string name="change_Image">Change Image</string>
     <string name="display_name">Display Name</string>
     <string name="status">status</string>
+    <string name="your_status">Your Status</string>
+    <string name="save_changes">Save Changes</string>
 </resources>
