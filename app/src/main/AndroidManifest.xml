@@ -32,7 +32,8 @@
         <activity
             android:name=".Users_activity"
             android:parentActivityName=".MainActivity" />
-        <activity android:name=".status_activity"></activity>
+        <activity android:name=".status_activity" />
+        <activity android:name=".Profile_activity"></activity>
     </application>
 
 </manifest>
