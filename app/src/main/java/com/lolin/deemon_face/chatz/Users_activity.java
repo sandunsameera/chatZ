@@ -1,5 +1,6 @@
 package com.lolin.deemon_face.chatz;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -11,11 +12,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class Users_activity extends AppCompatActivity {
 
@@ -74,6 +79,7 @@ public class Users_activity extends AppCompatActivity {
                 // Bind the Chat object to the ChatHolder
                 userViewHolder.setName(users.name);
                 userViewHolder.setUserStatus(users.getStatus ());
+                userViewHolder.setUserImage(users.getThumb_image (), getApplicationContext ());
                 // ...
             }
 
@@ -96,6 +102,12 @@ public class Users_activity extends AppCompatActivity {
         public void setUserStatus(String status){
             TextView userStatusView = mView.findViewById (R.id.user_single_status);
             userStatusView.setText (status);
+        }
+
+        public void setUserImage(String thumb_image, Context ctx){
+
+            CircleImageView userImageView = mView.findViewById (R.id.user_single_image);
+            Glide.with (ctx).load (thumb_image).apply (RequestOptions.errorOf (R.drawable.ic_person_black_24dp)).into (userImageView);
         }
     }
 
