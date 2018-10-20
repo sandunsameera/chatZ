@@ -73,6 +73,7 @@ public class Users_activity extends AppCompatActivity {
             protected void onBindViewHolder(UserViewHolder userViewHolder, int i, Users users) {
                 // Bind the Chat object to the ChatHolder
                 userViewHolder.setName(users.name);
+                userViewHolder.setUserStatus(users.getStatus ());
                 // ...
             }
 
@@ -90,6 +91,11 @@ public class Users_activity extends AppCompatActivity {
         public void setName(String name){
             TextView userNameView =mView.findViewById(R.id.user_single_name);
             userNameView.setText(name);
+        }
+
+        public void setUserStatus(String status){
+            TextView userStatusView = mView.findViewById (R.id.user_single_status);
+            userStatusView.setText (status);
         }
     }
 
