@@ -72,6 +72,7 @@ public class Users_activity extends AppCompatActivity {
                 View view = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.users_single_layout, parent, false);
 
+
                 return new UserViewHolder(view);
             }
 
