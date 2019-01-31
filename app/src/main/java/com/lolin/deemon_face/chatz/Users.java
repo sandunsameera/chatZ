@@ -51,5 +51,4 @@ public class Users {
     public void setThumb_image(String thumb_image) {
         this.thumb_image = thumb_image;
     }
-    //kadbcbqbvbscjb
 }

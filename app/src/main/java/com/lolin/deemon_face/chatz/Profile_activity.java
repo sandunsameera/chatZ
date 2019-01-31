@@ -15,7 +15,7 @@ public class Profile_activity extends AppCompatActivity {
 
         String user_id = getIntent ().getStringExtra ("user_id");
 
-        mDisplayID = findViewById (R.id.profile_Display_name);
+//        mDisplayID = findViewById (R.id.);
         mDisplayID.setText (user_id);
 
 
